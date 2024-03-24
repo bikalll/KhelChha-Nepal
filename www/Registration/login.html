@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login">
+            <form id="loginForm">
+                <h1>Login</h1>
+                <hr>
+                <p>For Future, For Sports</p>
+                <label for="emailInput">Email</label>
+                <input type="email" id="emailInput" placeholder="abc@example.com">
+                <label for="passwordInput">Password</label>
+                <input type="password" id="passwordInput" placeholder="Enter your password">
+                <button type="submit">Submit</button>
+                <p>
+                    <a href="#">Forgot Password?</a>
+                </p>
+            </form>
+        </div>
+        <div class="pic">
+            <img src="./hero-photo.png" alt="">
+        </div>
+    </div>
+
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        const firebaseConfig = {
+  apiKey: "AIzaSyBukLkHapH-rDvAvNk3aGJFbMdGsQZ6R4I",
+  authDomain: "fest-bcddb.firebaseapp.com",
+  projectId: "fest-bcddb",
+  storageBucket: "fest-bcddb.appspot.com",
+  messagingSenderId: "308862126033",
+  appId: "1:308862126033:web:a6cc0ba460e965320382f0",
+  measurementId: "G-S7Y5QVW8KQ"
+};
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        const loginForm = document.getElementById("loginForm");
+
+        loginForm.addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            const email = document.getElementById("emailInput").value;
+            const password = document.getElementById("passwordInput").value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                   location.href="../Home/index1.html"
+                })
+                .catch((error) => {
+                    console.error("Error logging in", error);
+                    alert(error.message);
+                });
+        });
+    </script>
+    
+</body>
+</html>
